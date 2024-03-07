@@ -16,6 +16,7 @@ There are two classes, a `Robot` and a `Goal` class.
 The `Robot` class handles the simulation and offers a few functions:
 - reset joint positions
 - get current joint positions
+- get joint limits
 - compute end effector position using forward kinematics
 - check whether the robot is in collision with the environment or itself
 - compute the Jacobian matrix

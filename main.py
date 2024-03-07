@@ -12,6 +12,11 @@ if __name__ == '__main__':
         robot.set_goal(goal)  # only serves visualization purposes
 
     print('---------------------')
+    print('the joint limits of the robot are:')
+    print('lower: ', robot.joint_limits()[0])
+    print('upper: ', robot.joint_limits()[1])
+
+    print('---------------------')
     input('hit enter to continue')
 
     # some exemplary usage of functions

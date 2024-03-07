@@ -39,10 +39,24 @@ class Robot:
         self.home_conf = [-0.017792060227770554, -0.7601235411041661, 0.019782607023391807, -2.342050140544315,
                           0.029840531355804868, 1.5411935298621688, 0.7534486589746342]
 
+        # determine joint limits
+        limits = []
+        for i in self.arm_joint_ids:
+            limits.append(p.getJointInfo(self.robot_id, i)[8:10])
+        self._joint_limits = np.asarray(limits)
+
         # set initial robot configuration
         self.reset_joint_pos(self.home_conf)
         for finger_id in [9, 10]:
             p.resetJointState(self.robot_id, finger_id, 0.04)
+
+    def joint_limits(self):
+        """
+        Returns the joint limits of the robot.
+        :return: tuple of ndarrays, (7,) lower and upper joint limits.
+        """
+        lower, upper = self._joint_limits[:, 0], self._joint_limits[:, 1]
+        return lower, upper
 
     def reset_joint_pos(self, joint_pos):
         """
