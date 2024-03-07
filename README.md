@@ -25,6 +25,8 @@ The `Goal` class provides the goal position and a metric to check the distance a
 There are six different goals, which can all be used in development and testing.
 
 Finally, the `main.py` file shows some exemplary use of the classes.
+It should run without any modifications, show the robot in the starting configuration and visualise all the goals.
+Once you hit Enter on the command line, it shows a different (colliding) joint configuration.
 
 ## task
 
