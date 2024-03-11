@@ -32,8 +32,8 @@ Once you hit Enter on the command line, it shows a different (colliding) joint c
 ## task
 
 ## Overview
-This repository presents Python code implementing the JPI RRT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm for a 7 DOF Panda robot using JPI RRT as a requirement for a PhD in Computer Science at Aston University.  This implementation utilizes Python with libraries like `numpy` and `matplotlib`.
-The JPI-RRT algorithm combines random sampling with the Jacobian pseudoinverse to efficiently explore the configuration space of a robot arm and find collision-free paths from an initial configuration to a goal configuration. The algorithm iteratively builds a tree structure, gradually moving towards the goal configuration while avoiding collisions with obstacles in the workspace.
+This repository presents Python code implementing the $J^+$-RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm for a 7 DOF Panda robot using $J^+$-RTT as a requirement for a PhD in Computer Science at Aston University.  This implementation utilizes Python with libraries like `numpy` and `matplotlib`.
+The $J^+$-RTT algorithm combines random sampling with the Jacobian pseudoinverse to efficiently explore the configuration space of a robot arm and find collision-free paths from an initial configuration to a goal configuration. The algorithm iteratively builds a tree structure, gradually moving towards the goal configuration while avoiding collisions with obstacles in the workspace.
 ## Requirements
 
 - Python 3.11
@@ -58,7 +58,7 @@ The JPI-RRT algorithm combines random sampling with the Jacobian pseudoinverse t
 ## How it Works
 
 1. **Initialization**:
-   - The JPI RRT algorithm is initialized with the start configuration of the robot arm and an empty tree containing only the start configuration.
+   - The $J^+$-RTT algorithm is initialized with the start configuration of the robot arm and an empty tree containing only the start configuration.
 
 2. **Expansion**:
    - Iteratively expand the tree by generating random configurations in the workspace.
@@ -88,4 +88,4 @@ You can adjust various parameters in the algorithm to customize its behavior:
 
 
 ## Acknowledgments
-This implementation was inspired by the $J^+$-RTT algorithm as described in the research literature on [Humanoid motion planning for dual-arm manipulation and re-grasping tasks by Vahrenkamp, Nikolaus, et al. ](https://h2t.iar.kit.edu/pdf/Vahrenkamp2009b.pdf). The environment and was created by [Martin Rudorfer] (https://github.com/mrudorfer/pybullet-robot-base) 
+This implementation was inspired by the $J^+$-RTT algorithm as described in the research literature on [Humanoid motion planning for dual-arm manipulation and re-grasping tasks by Vahrenkamp, Nikolaus, et al. ](https://h2t.iar.kit.edu/pdf/Vahrenkamp2009b.pdf). The environment and was created by [Professor Martin Rudorfer](https://github.com/mrudorfer/pybullet-robot-base) 
