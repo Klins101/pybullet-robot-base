@@ -33,7 +33,7 @@ Once you hit Enter on the command line, it shows a different (colliding) joint c
 
 ## Overview
 
-This repository contains Python code implementing the \( J^+ \) -RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm. The $ J^+ $-RTT algorithm is a variant of the Rapidly exploring Random Trees (RRT) algorithm, designed for finding collision-free paths in a 3D environment. This implementation utilizes Python with libraries like `numpy`, `matplotlib`.
+This repository contains Python code implementing `x^2` the \( J^+ \) -RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm. The $ J^+ $-RTT algorithm is a variant of the Rapidly exploring Random Trees (RRT) algorithm, designed for finding collision-free paths in a 3D environment. This implementation utilizes Python with libraries like `numpy`, `matplotlib`.
 
 ## Requirements
 
