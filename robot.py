@@ -135,17 +135,6 @@ class Robot:
                     return True
         return False
 
-  # q: inverse kinematics
-    def inverse_kinematics(self, goal):
-        """
-        Computes the joint angles for the robot to reach a given goal position.
-        :param goal: Goal object, the goal position.
-        :return: list of floats, joint angles.
-        """
-        joint_angles = p.calculateInverseKinematics(
-            self.robot_id, endEffectorLinkIndex=self.end_effector_link_id, targetPosition=list(goal.pos))
-        return joint_angles
-
     def set_goal(self, goal):
         """
         displays a goal in the visualization
