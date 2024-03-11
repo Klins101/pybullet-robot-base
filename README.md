@@ -32,8 +32,9 @@ Once you hit Enter on the command line, it shows a different (colliding) joint c
 ## task
 
 ## Overview
-
-This repository contains Python code implementing the $ \( J^+ \)$  -RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm. The $ J^+ $-RTT algorithm is a variant of the Rapidly exploring Random Trees (RRT) algorithm, designed for finding collision-free paths in a 3D environment. This implementation utilizes Python with libraries like `numpy`, `matplotlib`.
+This repository presents Python code implementing the JPI RRT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm for a 7 DOF Panda robot using JPI RRT as a requirement for a PhD in Computer Science at Aston University. moving towards the goal configuration while avoiding collisions with obstacles in the workspace.
+This implementation utilizes Python with libraries like `numpy` and `matplotlib`.
+The JPI-RRT algorithm combines random sampling with the Jacobian pseudoinverse to efficiently explore the configuration space of a robot arm and find collision-free paths from an initial configuration to a goal configuration. The algorithm iteratively builds a tree structure, gradually 
 
 ## Requirements
 
@@ -58,12 +59,26 @@ This repository contains Python code implementing the $ \( J^+ \)$  -RTT (Jacobi
 
 ## How it Works
 
-The \( J^+ \) -RTT algorithm works by iteratively building a tree structure in the configuration space of the robot arm. Here's a brief overview of the algorithm:
+1. **Initialization**:
+   - The JPI RRT algorithm is initialized with the start configuration of the robot arm and an empty tree containing only the start configuration.
 
-1. **Initialization**: Start with a tree containing only the initial configuration.
-2. **Expansion**: Iteratively expand the tree by generating random configurations and extending the tree towards these configurations while ensuring collision-free paths.
-3. **Goal Biasing**: Occasionally bias the tree expansion towards the goal configuration to speed up convergence.
-4. **Termination**: Terminate the algorithm when the goal configuration is reached or a maximum number of iterations is reached.
+2. **Expansion**:
+   - Iteratively expand the tree by generating random configurations in the workspace.
+   - Use the Jacobian pseudoinverse to compute joint velocities that move the end effector towards the randomly generated configurations.
+   - Update the current configuration of the robot arm based on the computed joint velocities.
+   - Ensure that the generated configurations are collision-free by performing collision checking.
+   - If a collision-free configuration is found, add it to the tree.
+
+3. **Goal Biasing**:
+   - To speed up convergence, we occasionally bias the tree expansion towards the goal configuration to speed up convergence by sampling more points around the goal configuration.
+
+4. **Termination**:
+   - The algorithm is terminated when the maximum number of iterations is reached.
+
+5. **Output**:
+   - If a path from the start to the goal configuration is found, return the sequence of configurations that form the path.
+   - If no path is found within the maximum number of iterations, return a failure message.
+
 
 ## Configuration
 
@@ -75,4 +90,4 @@ You can adjust various parameters in the algorithm to customize its behavior:
 
 
 ## Acknowledgments
-This implementation was inspired by the $J^+$-RTT algorithm as described in the research literature on [Humanoid motion planning for dual-arm manipulation and re-grasping tasks by Vahrenkamp, Nikolaus, et al. ](https://h2t.iar.kit.edu/pdf/Vahrenkamp2009b.pdf). The 
+This implementation was inspired by the $J^+$-RTT algorithm as described in the research literature on [Humanoid motion planning for dual-arm manipulation and re-grasping tasks by Vahrenkamp, Nikolaus, et al. ](https://h2t.iar.kit.edu/pdf/Vahrenkamp2009b.pdf). The environment and was created by [Martin Rudorfer] (https://github.com/mrudorfer/pybullet-robot-base) 
