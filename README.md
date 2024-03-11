@@ -32,10 +32,8 @@ Once you hit Enter on the command line, it shows a different (colliding) joint c
 ## task
 
 ## Overview
-This repository presents Python code implementing the JPI RRT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm for a 7 DOF Panda robot using JPI RRT as a requirement for a PhD in Computer Science at Aston University. moving towards the goal configuration while avoiding collisions with obstacles in the workspace.
-This implementation utilizes Python with libraries like `numpy` and `matplotlib`.
-The JPI-RRT algorithm combines random sampling with the Jacobian pseudoinverse to efficiently explore the configuration space of a robot arm and find collision-free paths from an initial configuration to a goal configuration. The algorithm iteratively builds a tree structure, gradually 
-
+This repository presents Python code implementing the JPI RRT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm for a 7 DOF Panda robot using JPI RRT as a requirement for a PhD in Computer Science at Aston University.  This implementation utilizes Python with libraries like `numpy` and `matplotlib`.
+The JPI-RRT algorithm combines random sampling with the Jacobian pseudoinverse to efficiently explore the configuration space of a robot arm and find collision-free paths from an initial configuration to a goal configuration. The algorithm iteratively builds a tree structure, gradually moving towards the goal configuration while avoiding collisions with obstacles in the workspace.
 ## Requirements
 
 - Python 3.11
