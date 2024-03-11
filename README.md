@@ -33,14 +33,13 @@ Once you hit Enter on the command line, it shows a different (colliding) joint c
 
 ## Overview
 
-This repository contains Python code implementing the $ J^+ $-RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm. The $ J^+ $-RTT algorithm is a variant of the Rapidly exploring Random Trees (RRT) algorithm, designed for finding collision-free paths in a 3D environment. This implementation utilizes Python with libraries like `numpy`, `matplotlib`.
+This repository contains Python code implementing the \( J^+ \) -RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm. The $ J^+ $-RTT algorithm is a variant of the Rapidly exploring Random Trees (RRT) algorithm, designed for finding collision-free paths in a 3D environment. This implementation utilizes Python with libraries like `numpy`, `matplotlib`.
 
 ## Requirements
 
-- Python 3.x
+- Python 3.11
 - numpy
 - matplotlib
-- scipy
 
 ## Usage
 
@@ -59,7 +58,7 @@ This repository contains Python code implementing the $ J^+ $-RTT (Jacobian Pseu
 
 ## How it Works
 
-The J+-RTT algorithm works by iteratively building a tree structure in the configuration space of the robot arm. Here's a brief overview of the algorithm:
+The \( J^+ \) -RTT algorithm works by iteratively building a tree structure in the configuration space of the robot arm. Here's a brief overview of the algorithm:
 
 1. **Initialization**: Start with a tree containing only the initial configuration.
 2. **Expansion**: Iteratively expand the tree by generating random configurations and extending the tree towards these configurations while ensuring collision-free paths.
@@ -76,4 +75,4 @@ You can adjust various parameters in the algorithm to customize its behavior:
 
 
 ## Acknowledgments
-This implementation was inspired by the $ J^+ $-RTT algorithm as described in the research literature on path planning algorithms.
+This implementation was inspired by the $J^+$-RTT algorithm as described in the research literature on [Humanoid motion planning for dual-arm manipulation and re-grasping tasks by Vahrenkamp, Nikolaus, et al. ](https://h2t.iar.kit.edu/pdf/Vahrenkamp2009b.pdf). The 
