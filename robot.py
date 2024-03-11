@@ -27,8 +27,10 @@ class Robot:
 
         # load objects and robot
         self.plane_id = p.loadURDF('plane.urdf')
-        self.robot_id = p.loadURDF('franka_panda/panda.urdf', [0, 0, 0.01], useFixedBase=True)
-        collision_shape_id = p.createCollisionShape(shapeType=p.GEOM_MESH, fileName='assets/table.obj', meshScale=[0.8]*3)
+        self.robot_id = p.loadURDF(
+            'franka_panda/panda.urdf', [0, 0, 0.01], useFixedBase=True)
+        collision_shape_id = p.createCollisionShape(
+            shapeType=p.GEOM_MESH, fileName='assets/table.obj', meshScale=[0.8]*3)
         self.obstacle_id = p.createMultiBody(baseMass=0, baseCollisionShapeIndex=collision_shape_id,
                                              basePosition=[1.2, -0.8, 0],
                                              baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi/2]))
@@ -63,7 +65,8 @@ class Robot:
         Resets the joint positions of the robot.
         :param joint_pos: list/array of floats, joint positions.
         """
-        assert len(joint_pos) == len(self.arm_joint_ids), 'Invalid joint position list.'
+        assert len(joint_pos) == len(
+            self.arm_joint_ids), 'Invalid joint position list.'
         for i, pos in zip(self.arm_joint_ids, joint_pos):
             p.resetJointState(self.robot_id, i, pos)
 
@@ -79,7 +82,8 @@ class Robot:
         Computes the end effector position using forward kinematics.
         :return: ndarray (3,), position of the end effector.
         """
-        pos, *_ = p.getLinkState(self.robot_id, self.end_effector_link_id, computeForwardKinematics=True)
+        pos, *_ = p.getLinkState(self.robot_id,
+                                 self.end_effector_link_id, computeForwardKinematics=True)
         return np.asarray(pos)
 
     def get_jacobian(self):
@@ -115,7 +119,8 @@ class Robot:
 
         # check self-collision
         ignore_links = [7, 11]  # they do not have a collision shape
-        first_links = [0, 1, 2, 3, 4, 5]  # 6 cannot collide with the fingers due to kinematics
+        # 6 cannot collide with the fingers due to kinematics
+        first_links = [0, 1, 2, 3, 4, 5]
 
         for first_link in first_links:
             # skip links that are next to each other (supposed to be in contact) plus all the ignore links
@@ -125,17 +130,31 @@ class Robot:
                 collision = len(p.getClosestPoints(bodyA=self.robot_id, bodyB=self.robot_id, distance=0.0,
                                                    linkIndexA=first_link, linkIndexB=check_link)) > 0
                 if collision:
-                    # print(f'collision between link {first_link} and link {check_link}')
+                    print(
+                        f'collision between link {first_link} and link {check_link}')
                     return True
         return False
+
+  # q: inverse kinematics
+    def inverse_kinematics(self, goal):
+        """
+        Computes the joint angles for the robot to reach a given goal position.
+        :param goal: Goal object, the goal position.
+        :return: list of floats, joint angles.
+        """
+        joint_angles = p.calculateInverseKinematics(
+            self.robot_id, endEffectorLinkIndex=self.end_effector_link_id, targetPosition=list(goal.pos))
+        return joint_angles
 
     def set_goal(self, goal):
         """
         displays a goal in the visualization
         :param goal: Goal object
         """
-        visual_shape = p.createVisualShape(p.GEOM_SPHERE, radius=0.05, rgbaColor=[1.0, 0.0, 0.0, 1.0])
-        goal_body_id = p.createMultiBody(baseMass=0, baseVisualShapeIndex=visual_shape, basePosition=list(goal.pos))
+        visual_shape = p.createVisualShape(
+            p.GEOM_SPHERE, radius=0.05, rgbaColor=[1.0, 0.0, 0.0, 1.0])
+        goal_body_id = p.createMultiBody(
+            baseMass=0, baseVisualShapeIndex=visual_shape, basePosition=list(goal.pos))
 
     def disconnect(self):
         p.disconnect()

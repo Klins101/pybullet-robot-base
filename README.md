@@ -31,11 +31,49 @@ Once you hit Enter on the command line, it shows a different (colliding) joint c
 
 ## task
 
-Your task is to implement a **simple** motion planning method that can find a collision-free trajectory from the robot's starting configuration to a configuration in which the robot's end effector reaches the goal.
-There are a few things you should consider:
-- implement your method using only **pure Python/numpy**, no external libraries are allowed; specifically, you are not allowed to use the inverse kinematics function of pybullet
-- the **output** of your method should be **a list of collision-free waypoints** (arm configurations) with the last waypoint being in reach of the goal
-- the starting configuration is always the same
-- there are six goals available, but the method should only consider one goal at a time
-- each goal is defined by its position, i.e. the orientation of the end effector does not matter
-- you do not need to optimize for runtime or memory usage, however, the method should be able to find a valid path to at least some of the goals
+## Overview
+
+This repository contains Python code implementing the $ J^+ $-RTT (Jacobian Pseudoinverse-Based RRT) motion planning algorithm. The $ J^+ $-RTT algorithm is a variant of the Rapidly exploring Random Trees (RRT) algorithm, designed for finding collision-free paths in a 3D environment. This implementation utilizes Python with libraries like `numpy`, `matplotlib`.
+
+## Requirements
+
+- Python 3.x
+- numpy
+- matplotlib
+- scipy
+
+## Usage
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/Klins101/pybullet-robot-base
+    cd pybullet-robot-base
+    ```
+
+2. Run the main script:
+
+    ```bash
+    python main.py
+    ```
+
+## How it Works
+
+The J+-RTT algorithm works by iteratively building a tree structure in the configuration space of the robot arm. Here's a brief overview of the algorithm:
+
+1. **Initialization**: Start with a tree containing only the initial configuration.
+2. **Expansion**: Iteratively expand the tree by generating random configurations and extending the tree towards these configurations while ensuring collision-free paths.
+3. **Goal Biasing**: Occasionally bias the tree expansion towards the goal configuration to speed up convergence.
+4. **Termination**: Terminate the algorithm when the goal configuration is reached or a maximum number of iterations is reached.
+
+## Configuration
+
+You can adjust various parameters in the algorithm to customize its behavior:
+
+- `max_iter`: Maximum number of iterations.
+- `step_size`: Step size for extending the tree towards random configurations.
+- `threshold`: Threshold distance to consider a configuration close to the goal.
+
+
+## Acknowledgments
+This implementation was inspired by the $ J^+ $-RTT algorithm as described in the research literature on path planning algorithms.
