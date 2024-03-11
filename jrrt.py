@@ -36,7 +36,7 @@ class J_RRT:
             q_nearest = self.nearest_neighbor(q_rand)
             q_new = self.new_point(q_nearest, q_rand)
 
-            if not self.robot.in_collision():
+            if True:
                 self.nodes.append(q_new)
                 if self.dist(q_new, self.goal._pos) < self.delta:
                     return True, self.nodes

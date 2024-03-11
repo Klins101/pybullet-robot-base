@@ -1,6 +1,6 @@
 from robot import *
 from goal import *
-from another import *
+from jrrt import *
 
 
 if __name__ == '__main__':
@@ -13,7 +13,6 @@ if __name__ == '__main__':
     robot.set_goal(goal)
     initial_position = robot.ee_position()  # Initial position of the robot
     # Compute joint angles for the goal position
-    joint_angles = robot.inverse_kinematics(goal)
     rrt = J_RRT(robot, goal)  # Initialize J+-RRT planner
     found, path = rrt.plan_path()
 
