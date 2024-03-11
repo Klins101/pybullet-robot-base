@@ -22,6 +22,7 @@ if __name__ == '__main__':
         path = np.array(path)
         print(path)
         print(goal._pos)
+        """
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.plot(path[:, 0], path[:, 1], path[:, 2], '-o')
@@ -33,7 +34,7 @@ if __name__ == '__main__':
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
         ax.set_title('J+-RRT Path Planning')
-        plt.show()
+        plt.show() """
     else:
         print("Path not found!")
 
