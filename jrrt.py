@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 class J_RRT:
-    def __init__(self, robot, goal, step_size=0.02, max_iter=1000, delta=0.01):
+    def __init__(self, robot, goal, step_size=0.02, max_iter=100, delta=0.01):
         self.robot = robot
         self.goal = goal
         self.step_size = step_size

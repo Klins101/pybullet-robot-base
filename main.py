@@ -1,6 +1,7 @@
 from robot import *
 from goal import *
 from jrrt import *
+import cv2
 
 
 if __name__ == '__main__':
@@ -22,7 +23,6 @@ if __name__ == '__main__':
         path = np.array(path)
         print(path)
         print(goal._pos)
-        """
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.plot(path[:, 0], path[:, 1], path[:, 2], '-o')
@@ -34,14 +34,15 @@ if __name__ == '__main__':
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
         ax.set_title('J+-RRT Path Planning')
-        plt.show() """
+        plt.show()
     else:
         print("Path not found!")
 
     # Simulate the motion (you can add more steps for smoother motion)
-    for _ in range(1000):
+    for _ in range(50):
         p.stepSimulation()
-
+        # Render the frame
+        p.configureDebugVisualizer(p.COV_ENABLE_SINGLE_STEP_RENDERING, 1)
     # Clean up
     robot.disconnect()
 
@@ -77,4 +78,16 @@ if __name__ == '__main__':
     print('---------------------')
     input('hit enter to close simulation')
     robot.disconnect()
-"""
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.plot(path[:, 0], path[:, 1], path[:, 2], '-o')
+        ax.scatter(initial_position[0], initial_position[1],
+                   initial_position[2], c='r', marker='o')
+        ax.scatter(goal._pos[0], goal._pos[1],
+                   goal._pos[2], c='g', marker='o')
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        ax.set_title('J+-RRT Path Planning')
+        plt.show() """
