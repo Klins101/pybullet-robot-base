@@ -12,7 +12,6 @@ class DRLAgent:
         self.action_dim = action_dim
         # Initialize nn
         self.initialize_network()
-
         self.total_rewards = []
         self.steps_to_completion = []
 
@@ -40,12 +39,9 @@ class DRLAgent:
         states = torch.FloatTensor(states)
         actions = torch.LongTensor(actions)
         rewards = torch.FloatTensor(rewards)
-
         action_probs = self.model(states)
         selected_action_probs = action_probs.gather(1, actions.unsqueeze(1)).squeeze()
-
         loss = -torch.mean(torch.log(selected_action_probs) * rewards)
-
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
@@ -85,36 +81,25 @@ for episode in range(num_episodes):
     steps = 0
 
     for step in range(steps_per_episode):
-        # Get action
         action = agent.get_action(state)
-        # Apply action
         new_state = robot.reset_joint_pos(action)
         # Check collision
         collision = robot.in_collision()
         # Compute reward
         distance = goal.distance(new_state)
         reward = -distance if not collision else -1e3
-
-        # Check if the goal has been reached
         done = goal.reached(new_state)
-
         # Store the transition in the trajectory
         trajectory.append((state, action, reward, new_state, done))
-
         # Update the state
         state = new_state
-
         total_reward += reward
         steps += 1
 
-        # If the goal has been reached or a collision has occurred, end the episode
         if done or collision:
             break
 
-    # Update the agent's policy
     agent.update_policy(trajectory)
-
-    # Append metrics for plotting
     agent.total_rewards.append(total_reward)
     agent.steps_to_completion.append(steps)
 
